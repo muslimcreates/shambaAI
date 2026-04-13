@@ -1,264 +1,784 @@
+Shambaai auth · HTML
+Copy
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>ShambaAI — Farm Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=Instrument+Sans:wght@300;400;500&display=swap');
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--green:#1E3D0A;--green-mid:#2D5016;--green-light:#EFF4E8;--green-border:#C8D5B8;--amber:#E8A020;--text:#1C2B10;--muted:#6B7A60;--hint:#A0AE90;--cream:#F7F9F4;--white:#fff;--r:10px;--card-r:14px}
-body{font-family:'Instrument Sans',sans-serif;background:var(--cream);min-height:100vh}
-
-.wrap{display:flex;min-height:100vh}
-
-.panel-left{
-  width:48%;
-  background:var(--green);
-  padding:40px 44px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  position:relative;
-  overflow:hidden;
-}
-.panel-left::before{content:'';position:absolute;top:-90px;right:-90px;width:280px;height:280px;border-radius:50%;background:rgba(232,160,32,0.1)}
-.panel-left::after{content:'';position:absolute;bottom:-70px;left:-70px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,0.04)}
-
-.logo{font-family:'Fraunces',serif;font-size:26px;font-weight:600;color:#fff;letter-spacing:-0.3px}
-.logo em{color:var(--amber);font-style:normal}
-.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:0.5px solid rgba(255,255,255,0.2);border-radius:20px;padding:5px 12px;font-size:11px;color:rgba(255,255,255,0.7);margin-top:8px}
-.badge-dot{width:6px;height:6px;background:#5CD68B;border-radius:50%}
-
-.hero{flex:1;display:flex;flex-direction:column;justify-content:center;padding:36px 0}
-.tagline{font-family:'Fraunces',serif;font-size:34px;font-weight:600;color:#fff;line-height:1.22;margin-bottom:16px;letter-spacing:-0.4px}
-.tagline em{font-style:italic;color:var(--amber)}
-.desc{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.75;margin-bottom:32px;max-width:340px}
-
-.feats{display:flex;flex-direction:column;gap:14px}
-.feat{display:flex;align-items:flex-start;gap:12px}
-.feat-icon{width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
-.feat-title{font-size:13px;color:#fff;font-weight:500;margin-bottom:2px}
-.feat-sub{font-size:11px;color:rgba(255,255,255,0.5);line-height:1.5}
-
-.stats{display:flex;gap:24px;padding-top:28px;border-top:0.5px solid rgba(255,255,255,0.12)}
-.stat-val{font-family:'Fraunces',serif;font-size:20px;color:var(--amber);font-weight:600}
-.stat-lbl{font-size:11px;color:rgba(255,255,255,0.45);margin-top:2px}
-
-.panel-right{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 36px}
-
-.card{width:100%;max-width:380px}
-.card-title{font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--text);margin-bottom:4px}
-.card-sub{font-size:13px;color:var(--muted);margin-bottom:24px}
-
-.tabs{display:flex;background:var(--green-light);border-radius:10px;padding:4px;margin-bottom:24px;gap:4px}
-.tab{flex:1;padding:9px;border-radius:7px;border:none;background:transparent;font-size:13px;font-family:'Instrument Sans',sans-serif;color:var(--muted);cursor:pointer;font-weight:400;transition:all 0.15s}
-.tab.active{background:var(--white);color:var(--green);font-weight:500;box-shadow:0 1px 4px rgba(0,0,0,0.1)}
-
-.field{margin-bottom:14px}
-.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px;font-weight:500;text-transform:uppercase;letter-spacing:0.4px}
-.field input{width:100%;padding:12px 14px;border:0.5px solid var(--green-border);border-radius:var(--r);font-size:14px;font-family:'Instrument Sans',sans-serif;background:var(--white);color:var(--text);outline:none;transition:border-color 0.15s;-webkit-appearance:none}
-.field input:focus{border-color:var(--green-mid);box-shadow:0 0 0 3px rgba(45,80,22,0.08)}
-.field input::placeholder{color:#B0BCA5}
-
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-
-.forgot{text-align:right;margin-top:-8px;margin-bottom:18px}
-.forgot a{font-size:12px;color:var(--green-mid);text-decoration:none;cursor:pointer}
-
-.btn{width:100%;padding:13px;border:none;border-radius:var(--r);background:var(--green-mid);color:#fff;font-size:15px;font-family:'Instrument Sans',sans-serif;font-weight:500;cursor:pointer;letter-spacing:0.2px;transition:background 0.15s,transform 0.1s}
-.btn:hover{background:var(--green)}
-.btn:active{transform:scale(0.98)}
-
-.divider{display:flex;align-items:center;gap:12px;margin:18px 0}
-.divider-line{flex:1;height:0.5px;background:#DDE8D0}
-.divider span{font-size:12px;color:var(--hint)}
-
-.oauth{width:100%;padding:11px;border:0.5px solid var(--green-border);border-radius:var(--r);background:var(--white);font-size:13px;font-family:'Instrument Sans',sans-serif;color:#3A4A30;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background 0.15s}
-.oauth:hover{background:var(--green-light)}
-
-.switch-txt{text-align:center;font-size:13px;color:var(--hint);margin-top:18px}
-.switch-txt a{color:var(--green-mid);font-weight:500;cursor:pointer;text-decoration:none}
-
-.terms{font-size:11px;color:var(--hint);text-align:center;margin-top:12px;line-height:1.6}
-.terms a{color:var(--green-mid);text-decoration:none}
-
-.footer-txt{text-align:center;margin-top:28px;font-size:11px;color:var(--hint)}
-
-.mobile-header{display:none;background:var(--green);padding:20px 20px 24px;text-align:center}
-.mobile-logo{font-family:'Fraunces',serif;font-size:24px;font-weight:600;color:#fff}
-.mobile-logo em{color:var(--amber);font-style:normal}
-.mobile-sub{font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px}
-
-.mobile-features{display:none;padding:0 20px 20px;background:var(--green)}
-.mobile-feat-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.mobile-feat-row::-webkit-scrollbar{display:none}
-.mobile-feat-pill{flex-shrink:0;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:0.5px solid rgba(255,255,255,0.15);border-radius:20px;padding:7px 12px;font-size:12px;color:rgba(255,255,255,0.8);white-space:nowrap}
-.mobile-feat-pill span{font-size:13px}
-
-.mobile-stats{display:none;background:var(--green);padding:0 20px 28px}
-.mobile-stats-row{display:flex;gap:0;border-top:0.5px solid rgba(255,255,255,0.12);padding-top:20px}
-.mobile-stat{flex:1;text-align:center}
-.mobile-stat-val{font-family:'Fraunces',serif;font-size:18px;color:var(--amber);font-weight:600}
-.mobile-stat-lbl{font-size:11px;color:rgba(255,255,255,0.45);margin-top:2px}
-
-@media(max-width:900px){
-  .panel-left{width:44%;padding:36px 32px}
-  .tagline{font-size:28px}
-  .panel-right{padding:36px 28px}
-}
-
-@media(max-width:680px){
-  .wrap{flex-direction:column}
-  .panel-left{display:none}
-  .mobile-header{display:block}
-  .mobile-features{display:block}
-  .mobile-stats{display:block}
-  .panel-right{padding:28px 20px;justify-content:flex-start}
-  .card{max-width:100%}
-  .row2{grid-template-columns:1fr}
-  .footer-txt{margin-top:20px;margin-bottom:16px}
-}
-
-@media(max-width:380px){
-  .panel-right{padding:24px 16px}
-  .card-title{font-size:20px}
-}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  :root {
+    --green-deep: #1A3808;
+    --green-dark: #2D5016;
+    --green-mid: #3D6B20;
+    --green-light: #EFF4E8;
+    --green-border: #C4D4B0;
+    --amber: #E8A020;
+    --amber-light: #FEF3DC;
+    --text: #1C2B10;
+    --muted: #5E7050;
+    --hint: #9AAB86;
+    --cream: #F5F8F0;
+    --white: #ffffff;
+    --shadow: 0 2px 16px rgba(30,60,8,0.10);
+  }
+ 
+  html, body {
+    height: 100%;
+    font-family: 'Instrument Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+ 
+  /* ─── LAYOUT ─── */
+  .page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+  }
+ 
+  /* ─── LEFT BRAND PANEL ─── */
+  .brand {
+    background: var(--green-deep);
+    display: flex;
+    flex-direction: column;
+    padding: 48px 52px;
+    position: relative;
+    overflow: hidden;
+  }
+ 
+  .brand::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    background: rgba(232,160,32,0.08);
+    pointer-events: none;
+  }
+ 
+  .brand::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -80px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+    pointer-events: none;
+  }
+ 
+  .brand-top { position: relative; z-index: 1; }
+ 
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.4px;
+    line-height: 1;
+  }
+  .logo span { color: var(--amber); }
+ 
+  .live-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 10px;
+    background: rgba(255,255,255,0.09);
+    border: 0.5px solid rgba(255,255,255,0.18);
+    border-radius: 99px;
+    padding: 5px 13px;
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.2px;
+  }
+ 
+  .live-dot {
+    width: 7px; height: 7px;
+    background: #5CD68B;
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+ 
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+ 
+  .brand-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 44px 0 36px;
+    position: relative;
+    z-index: 1;
+  }
+ 
+  .headline {
+    font-family: 'Fraunces', serif;
+    font-size: 40px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.18;
+    letter-spacing: -0.6px;
+    margin-bottom: 18px;
+  }
+  .headline i { color: var(--amber); font-style: italic; }
+ 
+  .description {
+    font-size: 14px;
+    color: rgba(255,255,255,0.58);
+    line-height: 1.8;
+    max-width: 360px;
+    margin-bottom: 36px;
+  }
+ 
+  .features { display: flex; flex-direction: column; gap: 16px; }
+ 
+  .feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+ 
+  .feature-icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.09);
+    border: 0.5px solid rgba(255,255,255,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+  }
+ 
+  .feature-name {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 3px;
+  }
+ 
+  .feature-desc {
+    font-size: 12px;
+    color: rgba(255,255,255,0.48);
+    line-height: 1.55;
+  }
+ 
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 0.5px solid rgba(255,255,255,0.1);
+    padding-top: 28px;
+    margin-top: 8px;
+    position: relative;
+    z-index: 1;
+  }
+ 
+  .stat + .stat {
+    border-left: 0.5px solid rgba(255,255,255,0.1);
+    padding-left: 20px;
+  }
+ 
+  .stat-value {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--amber);
+    line-height: 1;
+  }
+ 
+  .stat-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 4px;
+  }
+ 
+  /* ─── RIGHT AUTH PANEL ─── */
+  .auth {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 40px;
+    background: var(--white);
+  }
+ 
+  .auth-inner {
+    width: 100%;
+    max-width: 400px;
+  }
+ 
+  .auth-heading {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+    letter-spacing: -0.3px;
+  }
+ 
+  .auth-sub {
+    font-size: 13.5px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+ 
+  /* ─── TABS ─── */
+  .tab-bar {
+    display: flex;
+    background: var(--green-light);
+    border-radius: 11px;
+    padding: 4px;
+    margin-bottom: 28px;
+    gap: 4px;
+  }
+ 
+  .tab-btn {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 13.5px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.18s ease;
+    font-weight: 400;
+  }
+ 
+  .tab-btn.active {
+    background: var(--white);
+    color: var(--green-dark);
+    font-weight: 500;
+    box-shadow: 0 1px 5px rgba(30,56,8,0.12);
+  }
+ 
+  /* ─── FORM FIELDS ─── */
+  .field { margin-bottom: 16px; }
+ 
+  .field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+ 
+  .field input {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid var(--green-border);
+    border-radius: 10px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 14.5px;
+    color: var(--text);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+ 
+  .field input:focus {
+    border-color: var(--green-dark);
+    box-shadow: 0 0 0 3px rgba(45,80,22,0.1);
+  }
+ 
+  .field input::placeholder { color: #BFCFAF; }
+ 
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+ 
+  .forgot-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -8px;
+    margin-bottom: 20px;
+  }
+ 
+  .link {
+    font-size: 12.5px;
+    color: var(--green-dark);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .link:hover { text-decoration: underline; }
+ 
+  /* ─── BUTTONS ─── */
+  .btn-primary {
+    width: 100%;
+    padding: 14px;
+    background: var(--green-dark);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.2px;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .btn-primary:hover { background: var(--green-deep); }
+  .btn-primary:active { transform: scale(0.98); }
+ 
+  /* ─── DIVIDER ─── */
+  .or-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 20px 0;
+  }
+  .or-line { flex: 1; height: 1px; background: var(--green-border); opacity: 0.5; }
+  .or-text { font-size: 12px; color: var(--hint); }
+ 
+  /* ─── GOOGLE BTN ─── */
+  .btn-google {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--green-border);
+    border-radius: 10px;
+    background: var(--white);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 13.5px;
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .btn-google:hover { background: var(--green-light); border-color: #AABF96; }
+ 
+  /* ─── SWITCH ─── */
+  .switch-row {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 13.5px;
+    color: var(--hint);
+  }
+  .switch-row a {
+    color: var(--green-dark);
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .switch-row a:hover { text-decoration: underline; }
+ 
+  .terms-note {
+    font-size: 11.5px;
+    color: var(--hint);
+    text-align: center;
+    margin-top: 12px;
+    line-height: 1.65;
+  }
+  .terms-note a { color: var(--green-dark); text-decoration: none; }
+  .terms-note a:hover { text-decoration: underline; }
+ 
+  .auth-footer {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 11.5px;
+    color: #BDD0A8;
+  }
+ 
+  /* ─── MOBILE HEADER (hidden on desktop) ─── */
+  .mobile-brand {
+    display: none;
+    background: var(--green-deep);
+  }
+ 
+  .mobile-brand-top {
+    padding: 28px 24px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+ 
+  .mobile-brand-top::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(232,160,32,0.1);
+    pointer-events: none;
+  }
+ 
+  .mobile-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.4px;
+    position: relative;
+    z-index: 1;
+  }
+  .mobile-logo span { color: var(--amber); }
+ 
+  .mobile-tagline {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: rgba(255,255,255,0.55);
+    margin-top: 4px;
+    position: relative;
+    z-index: 1;
+  }
+ 
+  .mobile-pills {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 0 20px 20px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mobile-pills::-webkit-scrollbar { display: none; }
+ 
+  .pill {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.1);
+    border: 0.5px solid rgba(255,255,255,0.15);
+    border-radius: 99px;
+    padding: 7px 13px;
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.82);
+    white-space: nowrap;
+  }
+ 
+  .pill-icon { font-size: 14px; }
+ 
+  .mobile-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 0.5px solid rgba(255,255,255,0.1);
+    margin: 0 20px;
+    padding: 16px 0 24px;
+    gap: 0;
+  }
+ 
+  .mobile-stat { text-align: center; }
+  .mobile-stat + .mobile-stat { border-left: 0.5px solid rgba(255,255,255,0.1); }
+ 
+  .mobile-stat-value {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--amber);
+  }
+ 
+  .mobile-stat-label {
+    font-size: 10.5px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 3px;
+  }
+ 
+  /* ─── RESPONSIVE BREAKPOINTS ─── */
+ 
+  /* Large tablet */
+  @media (max-width: 960px) {
+    .brand { padding: 40px 36px; }
+    .headline { font-size: 34px; }
+    .auth { padding: 40px 28px; }
+  }
+ 
+  /* Tablet — switch to stacked */
+  @media (max-width: 768px) {
+    .page {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+    }
+    .brand { display: none; }
+    .mobile-brand { display: block; }
+    .auth {
+      padding: 32px 24px 40px;
+      justify-content: flex-start;
+      background: var(--cream);
+    }
+    .auth-inner { max-width: 480px; margin: 0 auto; width: 100%; }
+    .auth-heading { font-size: 23px; }
+  }
+ 
+  /* Phone */
+  @media (max-width: 480px) {
+    .auth { padding: 24px 16px 36px; }
+    .mobile-brand-top { padding: 24px 20px 16px; }
+    .two-col { grid-template-columns: 1fr; }
+    .field input { padding: 13px 14px; font-size: 16px; /* prevents iOS zoom */ }
+    .auth-heading { font-size: 21px; }
+    .btn-primary { padding: 15px; font-size: 15px; }
+  }
+ 
+  /* Small phone */
+  @media (max-width: 360px) {
+    .auth { padding: 20px 14px 32px; }
+    .tab-btn { font-size: 12.5px; padding: 9px 8px; }
+  }
 </style>
-
-<div class="wrap">
-
-  <div class="mobile-header">
-    <div class="mobile-logo">Shamba<em>AI</em></div>
-    <div class="mobile-sub">Farm Intelligence · Kenya</div>
+</head>
+<body>
+ 
+<!-- MOBILE-ONLY BRAND HEADER -->
+<div class="mobile-brand">
+  <div class="mobile-brand-top">
+    <div class="mobile-logo">Shamba<span>AI</span></div>
+    <div class="mobile-tagline">Smart farming, rooted in your land.</div>
   </div>
-
-  <div class="mobile-features">
-    <div class="mobile-feat-row">
-      <div class="mobile-feat-pill"><span>🌱</span> Crop intelligence</div>
-      <div class="mobile-feat-pill"><span>🌦</span> Hyperlocal weather</div>
-      <div class="mobile-feat-pill"><span>📈</span> Live market prices</div>
-      <div class="mobile-feat-pill"><span>🤖</span> AI in Swahili</div>
-    </div>
+  <div class="mobile-pills">
+    <div class="pill"><span class="pill-icon">🌱</span> Crop intelligence</div>
+    <div class="pill"><span class="pill-icon">🌦</span> Hyperlocal weather</div>
+    <div class="pill"><span class="pill-icon">📈</span> Live market prices</div>
+    <div class="pill"><span class="pill-icon">🤖</span> AI in Swahili</div>
   </div>
-
   <div class="mobile-stats">
-    <div class="mobile-stats-row">
-      <div class="mobile-stat"><div class="mobile-stat-val">12K+</div><div class="mobile-stat-lbl">Farmers</div></div>
-      <div class="mobile-stat"><div class="mobile-stat-val">47</div><div class="mobile-stat-lbl">Counties</div></div>
-      <div class="mobile-stat"><div class="mobile-stat-val">94%</div><div class="mobile-stat-lbl">Yield improvement</div></div>
+    <div class="mobile-stat">
+      <div class="mobile-stat-value">12K+</div>
+      <div class="mobile-stat-label">Farmers</div>
+    </div>
+    <div class="mobile-stat">
+      <div class="mobile-stat-value">47</div>
+      <div class="mobile-stat-label">Counties</div>
+    </div>
+    <div class="mobile-stat">
+      <div class="mobile-stat-value">94%</div>
+      <div class="mobile-stat-label">Yield improvement</div>
     </div>
   </div>
-
-  <div class="panel-left">
-    <div>
-      <div class="logo">Shamba<em>AI</em></div>
-      <div class="badge"><div class="badge-dot"></div> Farm Intelligence · Kenya</div>
+</div>
+ 
+<div class="page">
+ 
+  <!-- LEFT: BRAND -->
+  <div class="brand">
+    <div class="brand-top">
+      <div class="logo">Shamba<span>AI</span></div>
+      <div class="live-pill">
+        <div class="live-dot"></div>
+        Farm Intelligence · Kenya
+      </div>
     </div>
-    <div class="hero">
-      <div class="tagline">Smart farming,<br><em>rooted in</em><br>your land.</div>
-      <p class="desc">ShambaAI brings AI-powered insights to every Kenyan farmer — crop planning, disease detection, weather alerts and market prices. In Swahili and English.</p>
-      <div class="feats">
-        <div class="feat">
-          <div class="feat-icon">🌱</div>
-          <div><div class="feat-title">Crop intelligence</div><div class="feat-sub">Planting schedules and disease detection from field photos.</div></div>
+ 
+    <div class="brand-body">
+      <div class="headline">Smart farming,<br><i>rooted in</i><br>your land.</div>
+      <p class="description">ShambaAI brings AI-powered insights to every Kenyan farmer — from soil health and crop planning to weather alerts and live market prices. Available in Swahili and English.</p>
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">🌱</div>
+          <div>
+            <div class="feature-name">Crop intelligence</div>
+            <div class="feature-desc">Personalised planting schedules and disease detection from your field photos.</div>
+          </div>
         </div>
-        <div class="feat">
-          <div class="feat-icon">🌦</div>
-          <div><div class="feat-title">Hyperlocal weather</div><div class="feat-sub">Rain and frost alerts for your exact location.</div></div>
+        <div class="feature">
+          <div class="feature-icon">🌦</div>
+          <div>
+            <div class="feature-name">Hyperlocal weather</div>
+            <div class="feature-desc">Rain and frost alerts calibrated to your exact GPS location.</div>
+          </div>
         </div>
-        <div class="feat">
-          <div class="feat-icon">📈</div>
-          <div><div class="feat-title">Market prices</div><div class="feat-sub">Live Nairobi and local prices — know when to sell.</div></div>
+        <div class="feature">
+          <div class="feature-icon">📈</div>
+          <div>
+            <div class="feature-name">Market prices</div>
+            <div class="feature-desc">Live Nairobi and local market rates — know exactly when to sell.</div>
+          </div>
         </div>
       </div>
     </div>
+ 
     <div class="stats">
-      <div><div class="stat-val">12K+</div><div class="stat-lbl">Active farmers</div></div>
-      <div><div class="stat-val">47</div><div class="stat-lbl">Counties covered</div></div>
-      <div><div class="stat-val">94%</div><div class="stat-lbl">Yield improvement</div></div>
+      <div class="stat">
+        <div class="stat-value">12K+</div>
+        <div class="stat-label">Active farmers</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">47</div>
+        <div class="stat-label">Counties covered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">94%</div>
+        <div class="stat-label">Yield improvement</div>
+      </div>
     </div>
   </div>
-
-  <div class="panel-right">
-    <div class="card">
-      <div id="cardTitle" class="card-title">Welcome back</div>
-      <div id="cardSub" class="card-sub">Sign in to your ShambaAI account</div>
-
-      <div class="tabs">
-        <button class="tab active" id="tabLogin" onclick="showLogin()">Login</button>
-        <button class="tab" id="tabSignup" onclick="showSignup()">Create account</button>
+ 
+  <!-- RIGHT: AUTH -->
+  <div class="auth">
+    <div class="auth-inner">
+ 
+      <div id="authHeading" class="auth-heading">Welcome back</div>
+      <div id="authSub" class="auth-sub">Sign in to your ShambaAI account</div>
+ 
+      <div class="tab-bar">
+        <button class="tab-btn active" id="tabLogin" onclick="showLogin()">Login</button>
+        <button class="tab-btn" id="tabSignup" onclick="showSignup()">Create account</button>
       </div>
-
+ 
+      <!-- LOGIN FORM -->
       <div id="loginForm">
-        <div class="field"><label>Email address</label><input type="email" id="loginEmail" placeholder="you@example.com" inputmode="email" autocomplete="email"></div>
-        <div class="field"><label>Password</label><input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password"></div>
-        <div class="forgot"><a>Forgot password?</a></div>
-        <button class="btn" onclick="handleLogin()">Sign in</button>
-        <div class="divider"><div class="divider-line"></div><span>or</span><div class="divider-line"></div></div>
-        <button class="oauth">
-          <svg width="16" height="16" viewBox="0 0 24 24" style="flex-shrink:0"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        <div class="field">
+          <label>Email address</label>
+          <input type="email" id="loginEmail" placeholder="you@example.com"
+            inputmode="email" autocomplete="email" autocapitalize="none">
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••"
+            autocomplete="current-password">
+        </div>
+        <div class="forgot-row">
+          <a class="link">Forgot password?</a>
+        </div>
+        <button class="btn-primary" onclick="handleLogin()">Sign in</button>
+        <div class="or-divider">
+          <div class="or-line"></div>
+          <span class="or-text">or continue with</span>
+          <div class="or-line"></div>
+        </div>
+        <button class="btn-google">
+          <svg width="17" height="17" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
           Continue with Google
         </button>
       </div>
-
+ 
+      <!-- SIGNUP FORM -->
       <div id="signupForm" style="display:none">
-        <div class="field"><label>Full name</label><input type="text" id="signupName" placeholder="Amina Wanjiru" autocomplete="name"></div>
-        <div class="row2">
-          <div class="field"><label>Email</label><input type="email" id="signupEmail" placeholder="you@example.com" inputmode="email" autocomplete="email"></div>
-          <div class="field"><label>Phone</label><input type="tel" id="signupPhone" placeholder="+254 7XX" inputmode="tel" autocomplete="tel"></div>
+        <div class="field">
+          <label>Full name</label>
+          <input type="text" id="signupName" placeholder="Amina Wanjiru"
+            autocomplete="name" autocapitalize="words">
         </div>
-        <div class="field"><label>County / Region</label><input type="text" id="signupCounty" placeholder="e.g. Nakuru, Meru"></div>
-        <div class="field"><label>Password</label><input type="password" id="signupPassword" placeholder="Min. 8 characters" autocomplete="new-password"></div>
-        <button class="btn" onclick="handleSignup()">Create my account</button>
-        <div class="terms">By signing up you agree to our <a>Terms</a> and <a>Privacy Policy</a>.</div>
+        <div class="two-col">
+          <div class="field">
+            <label>Email</label>
+            <input type="email" id="signupEmail" placeholder="you@example.com"
+              inputmode="email" autocomplete="email" autocapitalize="none">
+          </div>
+          <div class="field">
+            <label>Phone</label>
+            <input type="tel" id="signupPhone" placeholder="+254 7XX XXX XXX"
+              inputmode="tel" autocomplete="tel">
+          </div>
+        </div>
+        <div class="field">
+          <label>County / Region</label>
+          <input type="text" id="signupCounty" placeholder="e.g. Nakuru, Meru, Kisumu"
+            autocapitalize="words">
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" id="signupPassword" placeholder="Minimum 8 characters"
+            autocomplete="new-password">
+        </div>
+        <button class="btn-primary" onclick="handleSignup()">Create my account →</button>
+        <div class="terms-note">
+          By signing up you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+        </div>
       </div>
-
-      <div class="switch-txt" id="switchTxt">
+ 
+      <div class="switch-row" id="switchRow">
         New to ShambaAI? <a onclick="showSignup()">Create a free account</a>
       </div>
+ 
+      <div class="auth-footer">ShambaAI · Made for Kenyan farmers · © 2025</div>
     </div>
-    <div class="footer-txt">ShambaAI · Made for Kenyan farmers · © 2025</div>
   </div>
+ 
 </div>
-
+ 
 <script>
-function showLogin(){
-  document.getElementById('loginForm').style.display='block';
-  document.getElementById('signupForm').style.display='none';
-  document.getElementById('tabLogin').classList.add('active');
-  document.getElementById('tabSignup').classList.remove('active');
-  document.getElementById('cardTitle').textContent='Welcome back';
-  document.getElementById('cardSub').textContent='Sign in to your ShambaAI account';
-  document.getElementById('switchTxt').innerHTML='New to ShambaAI? <a onclick="showSignup()" style="color:#2D5016;font-weight:500;cursor:pointer;">Create a free account</a>';
-}
-function showSignup(){
-  document.getElementById('loginForm').style.display='none';
-  document.getElementById('signupForm').style.display='block';
-  document.getElementById('tabSignup').classList.add('active');
-  document.getElementById('tabLogin').classList.remove('active');
-  document.getElementById('cardTitle').textContent='Join ShambaAI';
-  document.getElementById('cardSub').textContent='Free forever for small-scale farmers';
-  document.getElementById('switchTxt').innerHTML='Already have an account? <a onclick="showLogin()" style="color:#2D5016;font-weight:500;cursor:pointer;">Sign in</a>';
-}
-async function handleLogin(){
-  const email=document.getElementById('loginEmail').value;
-  const pw=document.getElementById('loginPassword').value;
-  if(!email||!pw){alert('Please fill in all fields.');return;}
-  try{
-    const r=await fetch('http://localhost:3000/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password:pw})});
-    const d=await r.json();
-    if(d.success){localStorage.setItem('token',d.token);window.location.href='index.html';}
-    else alert('Login failed. Check your credentials.');
-  }catch{alert('Could not connect. Please try again.');}
-}
-async function handleSignup(){
-  const name=document.getElementById('signupName').value;
-  const email=document.getElementById('signupEmail').value;
-  const pw=document.getElementById('signupPassword').value;
-  const county=document.getElementById('signupCounty').value;
-  if(!name||!email||!pw){alert('Please fill in the required fields.');return;}
-  if(pw.length<8){alert('Password must be at least 8 characters.');return;}
-  try{
-    const r=await fetch('http://localhost:3000/signup',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,password:pw,county})});
-    const d=await r.json();
-    if(d.success){alert('Account created! Welcome to ShambaAI.');showLogin();}
-    else alert('Signup failed. Please try again.');
-  }catch{alert('Could not connect. Please try again.');}
-}
+  function showLogin() {
+    document.getElementById('loginForm').style.display = 'block';
+    document.getElementById('signupForm').style.display = 'none';
+    document.getElementById('tabLogin').classList.add('active');
+    document.getElementById('tabSignup').classList.remove('active');
+    document.getElementById('authHeading').textContent = 'Welcome back';
+    document.getElementById('authSub').textContent = 'Sign in to your ShambaAI account';
+    document.getElementById('switchRow').innerHTML = 'New to ShambaAI? <a onclick="showSignup()">Create a free account</a>';
+  }
+ 
+  function showSignup() {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('signupForm').style.display = 'block';
+    document.getElementById('tabSignup').classList.add('active');
+    document.getElementById('tabLogin').classList.remove('active');
+    document.getElementById('authHeading').textContent = 'Join ShambaAI';
+    document.getElementById('authSub').textContent = 'Free forever for small-scale farmers';
+    document.getElementById('switchRow').innerHTML = 'Already have an account? <a onclick="showLogin()">Sign in</a>';
+  }
+ 
+  async function handleLogin() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    if (!email || !password) { alert('Please fill in all fields.'); return; }
+    try {
+      const res = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (data.success) {
+        localStorage.setItem('token', data.token);
+        window.location.href = 'index.html';
+      } else {
+        alert('Login failed. Please check your credentials.');
+      }
+    } catch (e) {
+      alert('Could not connect to server. Please try again.');
+    }
+  }
+ 
+  async function handleSignup() {
+    const name = document.getElementById('signupName').value.trim();
+    const email = document.getElementById('signupEmail').value.trim();
+    const password = document.getElementById('signupPassword').value;
+    const phone = document.getElementById('signupPhone').value.trim();
+    const county = document.getElementById('signupCounty').value.trim();
+    if (!name || !email || !password) { alert('Please fill in the required fields.'); return; }
+    if (password.length < 8) { alert('Password must be at least 8 characters.'); return; }
+    try {
+      const res = await fetch('http://localhost:3000/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password, phone, county })
+      });
+      const data = await res.json();
+      if (data.success) {
+        alert('Account created! Welcome to ShambaAI.');
+        showLogin();
+      } else {
+        alert('Signup failed. Please try again.');
+      }
+    } catch (e) {
+      alert('Could not connect to server. Please try again.');
+    }
+  }
 </script>
+</body>
+</html>
