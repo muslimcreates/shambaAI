@@ -1,0 +1,523 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=Instrument+Sans:wght@300;400;500&display=swap');
+
+  .sa-wrap {
+    min-height: 100vh;
+    display: flex;
+    font-family: 'Instrument Sans', sans-serif;
+    background: #F7F9F4;
+  }
+
+  /* LEFT PANEL */
+  .sa-left {
+    width: 52%;
+    background: #1E3D0A;
+    padding: 48px 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sa-left::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(200,134,10,0.12);
+  }
+
+  .sa-left::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .sa-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.3px;
+  }
+
+  .sa-logo em {
+    color: #E8A020;
+    font-style: normal;
+  }
+
+  .sa-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.1);
+    border: 0.5px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.75);
+    margin-top: 10px;
+    width: fit-content;
+  }
+
+  .sa-dot { width: 6px; height: 6px; background: #5CD68B; border-radius: 50%; }
+
+  .sa-hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 0;
+  }
+
+  .sa-tagline {
+    font-family: 'Fraunces', serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+  }
+
+  .sa-tagline em {
+    font-style: italic;
+    color: #E8A020;
+  }
+
+  .sa-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+    margin-bottom: 36px;
+    max-width: 360px;
+  }
+
+  .sa-features {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .sa-feat {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .sa-feat-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .sa-feat-text strong {
+    display: block;
+    font-size: 13px;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .sa-feat-text span {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.5;
+  }
+
+  .sa-stats {
+    display: flex;
+    gap: 28px;
+    padding-top: 32px;
+    border-top: 0.5px solid rgba(255,255,255,0.12);
+  }
+
+  .sa-stat-val {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    color: #E8A020;
+    font-weight: 600;
+  }
+
+  .sa-stat-lbl {
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    margin-top: 2px;
+  }
+
+  /* RIGHT PANEL */
+  .sa-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 40px;
+  }
+
+  .sa-card {
+    width: 100%;
+    max-width: 380px;
+  }
+
+  .sa-card-title {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1C2B10;
+    margin-bottom: 4px;
+  }
+
+  .sa-card-sub {
+    font-size: 13px;
+    color: #7A8A70;
+    margin-bottom: 28px;
+  }
+
+  /* TABS */
+  .sa-tabs {
+    display: flex;
+    background: #EFF4E8;
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 28px;
+    gap: 4px;
+  }
+
+  .sa-tab {
+    flex: 1;
+    padding: 9px;
+    border-radius: 7px;
+    border: none;
+    background: transparent;
+    font-size: 13px;
+    font-family: 'Instrument Sans', sans-serif;
+    color: #6B7A60;
+    cursor: pointer;
+    font-weight: 400;
+    transition: all 0.15s;
+  }
+
+  .sa-tab.active {
+    background: #fff;
+    color: #1E3D0A;
+    font-weight: 500;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  /* FIELDS */
+  .sa-field {
+    margin-bottom: 16px;
+  }
+
+  .sa-field label {
+    display: block;
+    font-size: 12px;
+    color: #6B7A60;
+    margin-bottom: 6px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  .sa-field input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 0.5px solid #C8D5B8;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: 'Instrument Sans', sans-serif;
+    background: #fff;
+    color: #1C2B10;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .sa-field input:focus {
+    border-color: #2D5016;
+    box-shadow: 0 0 0 3px rgba(45,80,22,0.08);
+  }
+
+  .sa-field input::placeholder { color: #B0BCA5; }
+
+  .sa-forgot {
+    text-align: right;
+    margin-top: -10px;
+    margin-bottom: 20px;
+  }
+
+  .sa-forgot a {
+    font-size: 12px;
+    color: #2D5016;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* BUTTON */
+  .sa-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #2D5016;
+    color: #fff;
+    font-size: 15px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.2px;
+    transition: background 0.15s, transform 0.1s;
+  }
+
+  .sa-btn:hover { background: #1E3D0A; }
+  .sa-btn:active { transform: scale(0.98); }
+
+  /* DIVIDER */
+  .sa-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+  }
+
+  .sa-divider-line {
+    flex: 1;
+    height: 0.5px;
+    background: #DDE8D0;
+  }
+
+  .sa-divider span {
+    font-size: 12px;
+    color: #A0AE90;
+  }
+
+  /* OAUTH */
+  .sa-oauth {
+    width: 100%;
+    padding: 11px;
+    border: 0.5px solid #C8D5B8;
+    border-radius: 10px;
+    background: #fff;
+    font-size: 13px;
+    font-family: 'Instrument Sans', sans-serif;
+    color: #3A4A30;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.15s;
+  }
+
+  .sa-oauth:hover { background: #F7F9F4; }
+
+  .sa-switch {
+    text-align: center;
+    font-size: 13px;
+    color: #8A9A80;
+    margin-top: 20px;
+  }
+
+  .sa-switch a {
+    color: #2D5016;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .sa-footer {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 11px;
+    color: #A0AE90;
+  }
+
+  @media (max-width: 680px) {
+    .sa-wrap { flex-direction: column; }
+    .sa-left { width: 100%; padding: 32px 28px; }
+    .sa-tagline { font-size: 28px; }
+    .sa-stats { display: none; }
+    .sa-right { padding: 32px 24px; }
+  }
+</style>
+
+<div class="sa-wrap">
+
+  <!-- LEFT: Brand panel -->
+  <div class="sa-left">
+    <div>
+      <div class="sa-logo">Shamba<em>AI</em></div>
+      <div class="sa-badge"><div class="sa-dot"></div> Farm Intelligence · Kenya</div>
+    </div>
+
+    <div class="sa-hero">
+      <div class="sa-tagline">Smart farming,<br><em>rooted in</em><br>your land.</div>
+      <p class="sa-desc">ShambaAI brings AI-powered insights to every Kenyan farmer — from soil health and crop planning to weather alerts and market prices. All in Swahili and English.</p>
+
+      <div class="sa-features">
+        <div class="sa-feat">
+          <div class="sa-feat-icon">🌱</div>
+          <div class="sa-feat-text">
+            <strong>Crop Intelligence</strong>
+            <span>Personalised planting schedules and disease detection from your field photos.</span>
+          </div>
+        </div>
+        <div class="sa-feat">
+          <div class="sa-feat-icon">🌦</div>
+          <div class="sa-feat-text">
+            <strong>Hyperlocal Weather</strong>
+            <span>Rain and frost alerts calibrated to your exact location.</span>
+          </div>
+        </div>
+        <div class="sa-feat">
+          <div class="sa-feat-icon">📈</div>
+          <div class="sa-feat-text">
+            <strong>Market Prices</strong>
+            <span>Live Nairobi and local market prices — know when to sell.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sa-stats">
+      <div>
+        <div class="sa-stat-val">12K+</div>
+        <div class="sa-stat-lbl">Active farmers</div>
+      </div>
+      <div>
+        <div class="sa-stat-val">47</div>
+        <div class="sa-stat-lbl">Counties covered</div>
+      </div>
+      <div>
+        <div class="sa-stat-val">94%</div>
+        <div class="sa-stat-lbl">Yield improvement</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Auth form -->
+  <div class="sa-right">
+    <div class="sa-card">
+
+      <div id="sa-title" class="sa-card-title">Welcome back</div>
+      <div id="sa-sub" class="sa-card-sub">Sign in to your ShambaAI account</div>
+
+      <div class="sa-tabs">
+        <button class="sa-tab active" id="tabLogin" onclick="showLogin()">Login</button>
+        <button class="sa-tab" id="tabSignup" onclick="showSignup()">Create account</button>
+      </div>
+
+      <!-- LOGIN -->
+      <div id="loginForm">
+        <div class="sa-field">
+          <label>Email address</label>
+          <input type="email" placeholder="you@example.com" id="loginEmail">
+        </div>
+        <div class="sa-field">
+          <label>Password</label>
+          <input type="password" placeholder="••••••••" id="loginPassword">
+        </div>
+        <div class="sa-forgot"><a>Forgot password?</a></div>
+        <button class="sa-btn" onclick="handleLogin()">Sign in</button>
+
+        <div class="sa-divider">
+          <div class="sa-divider-line"></div>
+          <span>or continue with</span>
+          <div class="sa-divider-line"></div>
+        </div>
+
+        <button class="sa-oauth">
+          <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          Continue with Google
+        </button>
+      </div>
+
+      <!-- SIGNUP -->
+      <div id="signupForm" style="display:none">
+        <div class="sa-field">
+          <label>Full name</label>
+          <input type="text" placeholder="Amina Wanjiru" id="signupName">
+        </div>
+        <div class="sa-field">
+          <label>Email address</label>
+          <input type="email" placeholder="you@example.com" id="signupEmail">
+        </div>
+        <div class="sa-field">
+          <label>Phone (optional)</label>
+          <input type="tel" placeholder="+254 700 000 000" id="signupPhone">
+        </div>
+        <div class="sa-field">
+          <label>Password</label>
+          <input type="password" placeholder="Min. 8 characters" id="signupPassword">
+        </div>
+        <button class="sa-btn" onclick="handleSignup()">Create my account</button>
+        <p style="font-size:11px;color:#A0AE90;text-align:center;margin-top:12px;line-height:1.6;">By creating an account you agree to our <a style="color:#2D5016;text-decoration:none;">Terms of Service</a> and <a style="color:#2D5016;text-decoration:none;">Privacy Policy</a>.</p>
+      </div>
+
+      <div class="sa-switch" id="switchText">
+        New to ShambaAI? <a onclick="showSignup()">Create a free account</a>
+      </div>
+
+    </div>
+
+    <div class="sa-footer">ShambaAI · Made for Kenyan farmers · © 2025</div>
+  </div>
+
+</div>
+
+<script>
+function showLogin(){
+  document.getElementById('loginForm').style.display='block';
+  document.getElementById('signupForm').style.display='none';
+  document.getElementById('tabLogin').classList.add('active');
+  document.getElementById('tabSignup').classList.remove('active');
+  document.getElementById('sa-title').textContent='Welcome back';
+  document.getElementById('sa-sub').textContent='Sign in to your ShambaAI account';
+  document.getElementById('switchText').innerHTML='New to ShambaAI? <a onclick="showSignup()" style="color:#2D5016;font-weight:500;cursor:pointer;">Create a free account</a>';
+}
+
+function showSignup(){
+  document.getElementById('loginForm').style.display='none';
+  document.getElementById('signupForm').style.display='block';
+  document.getElementById('tabSignup').classList.add('active');
+  document.getElementById('tabLogin').classList.remove('active');
+  document.getElementById('sa-title').textContent='Join ShambaAI';
+  document.getElementById('sa-sub').textContent='Free forever for small-scale farmers';
+  document.getElementById('switchText').innerHTML='Already have an account? <a onclick="showLogin()" style="color:#2D5016;font-weight:500;cursor:pointer;">Sign in</a>';
+}
+
+async function handleLogin(){
+  const email=document.getElementById('loginEmail').value;
+  const password=document.getElementById('loginPassword').value;
+  if(!email||!password){alert('Please fill in all fields.');return;}
+  try{
+    const res=await fetch('http://localhost:3000/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})});
+    const data=await res.json();
+    if(data.success){localStorage.setItem('token',data.token);window.location.href='index.html';}
+    else{alert('Login failed. Please check your credentials.');}
+  }catch(e){alert('Could not connect to server. Please try again.');}
+}
+
+async function handleSignup(){
+  const name=document.getElementById('signupName').value;
+  const email=document.getElementById('signupEmail').value;
+  const password=document.getElementById('signupPassword').value;
+  if(!name||!email||!password){alert('Please fill in the required fields.');return;}
+  if(password.length<8){alert('Password must be at least 8 characters.');return;}
+  try{
+    const res=await fetch('http://localhost:3000/signup',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,password})});
+    const data=await res.json();
+    if(data.success){alert('Account created! Welcome to ShambaAI.');showLogin();}
+    else{alert('Signup failed. Please try again.');}
+  }catch(e){alert('Could not connect to server. Please try again.');}
+}
+</script>
